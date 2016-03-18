@@ -38,7 +38,7 @@ public class CharCaseFilter: FilterProtocol {
         initialize(self)
     }
     
-    public func filter<I: Any, O: Any>(value: I, _ context: [String : AnyObject]?) throws -> O? {
+    public func filter<I: Any, O: Any>(value: I?, _ context: [String : AnyObject]?) throws -> O? {
         
         guard let value: String = value as? String else {
             return nil
@@ -65,7 +65,7 @@ public class CharCaseFilter: FilterProtocol {
             break
         }
         
-        return returnValue as? O ?? self.returnFailingValue(value)
+        return returnValue as? O
     }
     
     /**
@@ -85,4 +85,11 @@ public class CharCaseFilter: FilterProtocol {
     }
     
     
+}
+
+infix operator <- {}
+
+func <- <T: FilterProtocol>(lhs: FilterChain, rhs: T) {
+    
+    lhs.registerFilter(rhs)
 }

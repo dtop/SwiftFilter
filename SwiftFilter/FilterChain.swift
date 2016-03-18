@@ -19,12 +19,27 @@ class FilterChain: FilterProtocol {
     /// Holds all filters that will be applied
     var filters: [F] = []
     
-    var returnInputOnFailure: Bool = true
-    
     required init(@noescape _ initialize: (FilterChain) -> Void = { _ in }) {
         
         initialize(self)
     }
+    
+    func filter<I: Any, O: Any>(value: I?, _ context: [String : AnyObject]? = nil) throws -> O? {
+        
+        var val: O? = nil
+        for filter in filters {
+            
+            val = try filter.filter(value, context)
+            
+            if nil == val {
+                return nil
+            }
+        }
+        
+        return val ?? value as? O
+    }
+    
+    // MARK: CustomMethods
     
     /**
      Registers a FIlter to the chain
@@ -34,18 +49,5 @@ class FilterChain: FilterProtocol {
     func registerFilter(filter: F) {
         
         self.filters.append(filter)
-    }
-    
-    // MARK: FilterProtocol
-    
-    func filter<I: Any, O: Any>(value: I, _ context: [String : AnyObject]? = nil) throws -> O? {
-        
-        var val: O? = nil
-        for filter in filters {
-            
-            val = try filter.filter(value, context)
-        }
-        
-        return val ?? value as? O
     }
 }
