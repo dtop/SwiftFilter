@@ -10,6 +10,10 @@
 		9F8491321C9C97530054BB02 /* SwiftFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F8491311C9C97530054BB02 /* SwiftFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9F8491391C9C97530054BB02 /* SwiftFilter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F84912E1C9C97530054BB02 /* SwiftFilter.framework */; };
 		9F84913E1C9C97530054BB02 /* SwiftFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F84913D1C9C97530054BB02 /* SwiftFilterTests.swift */; };
+		9F84914A1C9C97B40054BB02 /* FilterChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8491481C9C97B40054BB02 /* FilterChain.swift */; };
+		9F84914B1C9C97B40054BB02 /* FilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8491491C9C97B40054BB02 /* FilterProtocol.swift */; };
+		9F84914E1C9C97C70054BB02 /* CharCaseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F84914D1C9C97C70054BB02 /* CharCaseFilter.swift */; };
+		9F8491511C9C97DA0054BB02 /* CharCaseFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8491501C9C97DA0054BB02 /* CharCaseFilterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +33,10 @@
 		9F8491381C9C97530054BB02 /* SwiftFilterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftFilterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F84913D1C9C97530054BB02 /* SwiftFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftFilterTests.swift; sourceTree = "<group>"; };
 		9F84913F1C9C97530054BB02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F8491481C9C97B40054BB02 /* FilterChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterChain.swift; sourceTree = "<group>"; };
+		9F8491491C9C97B40054BB02 /* FilterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterProtocol.swift; sourceTree = "<group>"; };
+		9F84914D1C9C97C70054BB02 /* CharCaseFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CharCaseFilter.swift; path = Filters/CharCaseFilter.swift; sourceTree = "<group>"; };
+		9F8491501C9C97DA0054BB02 /* CharCaseFilterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CharCaseFilterTests.swift; path = Filters/CharCaseFilterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +79,9 @@
 		9F8491301C9C97530054BB02 /* SwiftFilter */ = {
 			isa = PBXGroup;
 			children = (
+				9F84914C1C9C97BC0054BB02 /* Filter */,
+				9F8491481C9C97B40054BB02 /* FilterChain.swift */,
+				9F8491491C9C97B40054BB02 /* FilterProtocol.swift */,
 				9F8491311C9C97530054BB02 /* SwiftFilter.h */,
 				9F8491331C9C97530054BB02 /* Info.plist */,
 			);
@@ -80,10 +91,27 @@
 		9F84913C1C9C97530054BB02 /* SwiftFilterTests */ = {
 			isa = PBXGroup;
 			children = (
+				9F84914F1C9C97CD0054BB02 /* Filter */,
 				9F84913D1C9C97530054BB02 /* SwiftFilterTests.swift */,
 				9F84913F1C9C97530054BB02 /* Info.plist */,
 			);
 			path = SwiftFilterTests;
+			sourceTree = "<group>";
+		};
+		9F84914C1C9C97BC0054BB02 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				9F84914D1C9C97C70054BB02 /* CharCaseFilter.swift */,
+			);
+			name = Filter;
+			sourceTree = "<group>";
+		};
+		9F84914F1C9C97CD0054BB02 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				9F8491501C9C97DA0054BB02 /* CharCaseFilterTests.swift */,
+			);
+			name = Filter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,6 +222,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F84914A1C9C97B40054BB02 /* FilterChain.swift in Sources */,
+				9F84914B1C9C97B40054BB02 /* FilterProtocol.swift in Sources */,
+				9F84914E1C9C97C70054BB02 /* CharCaseFilter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F84913E1C9C97530054BB02 /* SwiftFilterTests.swift in Sources */,
+				9F8491511C9C97DA0054BB02 /* CharCaseFilterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +340,7 @@
 		9F8491431C9C97530054BB02 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -318,12 +351,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.nerdsee.SwiftFilter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		9F8491441C9C97530054BB02 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
