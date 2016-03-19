@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/dtop/SwiftFilter.svg)](https://travis-ci.org/dtop/SwiftFilter)
 [![Compatibility](https://img.shields.io/badge/Swift-2.1-blue.svg)](https://developer.apple.com/swift)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/dtop/SwiftValidate/master/LICENSE)
 [![codebeat badge](https://codebeat.co/badges/f380424d-a290-4d89-8b48-431da0bec33c)](https://codebeat.co/projects/github-com-dtop-swiftfilter)
 [![GitHub release](https://img.shields.io/github/release/dtop/SwiftFilter.svg)](https://github.com/dtop/SwiftFilter)
@@ -43,7 +44,7 @@ I Use SwiftFilter along with [SwiftValidate] together with [Eureka].
 
 [CocoaPods] not yet supported
 
-[Carthage] should work with `github dtop/SwiftFilter`
+[Carthage] should work with `github "dtop/SwiftFilter"`
 
 ## Usage
 
