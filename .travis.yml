@@ -7,6 +7,6 @@ before_install:
 script:
   - set -o pipefail
   - xcodebuild -version
-  - xctool -project SwiftFilter.xcodeproj -scheme $SCHEME test -sdk iphonesimulator GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES
+  - xctool -project SwiftFilter.xcodeproj -scheme $SCHEME test -sdk iphonesimulator GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES -enableCodeCoverage YES
 after_success:
   - bash <(curl -s https://codecov.io/bash)
