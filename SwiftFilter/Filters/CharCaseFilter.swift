@@ -49,9 +49,22 @@ public class CharCaseFilter: FilterProtocol {
             return nil
         }
         
+        return self.filterValue(value, caseType: cCase) as? O
+    }
+    
+    /**
+     Actually filters the value and applies the selected option
+     
+     - parameter value:    the value
+     - parameter caseType: the case to apply
+     
+     - returns: the filtered string
+     */
+    private func filterValue(value: String, caseType: Case) -> String {
+        
         var returnValue = ""
         
-        switch cCase {
+        switch caseType {
         case .Lowercase:
             returnValue = value.lowercaseString
             break
@@ -66,7 +79,7 @@ public class CharCaseFilter: FilterProtocol {
             break
         }
         
-        return returnValue as? O
+        return returnValue
     }
     
     /**
@@ -84,6 +97,4 @@ public class CharCaseFilter: FilterProtocol {
         lower.replaceRange(Range<String.Index>(start: lower.startIndex, end: lower.startIndex.advancedBy(1)), with: char.uppercaseString)
         return lower
     }
-    
-    
 }

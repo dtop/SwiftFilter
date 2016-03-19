@@ -26,11 +26,47 @@ By [Danilo Topalovic](http://blog.danilo-topalovic.de).
 
 ## Introduction
 
+When I wrote [SwiftValidate] I encountered some problems in form validation. A bunch of field values weren't really errorneous but needed to
+be changed in some way.
+
+Of course a validator should not change the value in any way so I decided to do another project with filtering.
+
+Similar to [Zend\Filter] this also works with a filter chain which applies a bunch of filters to a single value.
+I Use SwiftFilter along with [SwiftValidate] together with [Eureka].
+
 ## Requirements
+
+* iOS 8.0+
+* Xcode 7.0+
 
 ## Installation
 
+[CocoaPods] not yet supported
+
+[Carthage] should work with `github dtop/SwiftFilter`
+
 ## Usage
+
+```swift
+
+let inValue: String = "  \t \n  Some foo String   \t\t \n "
+
+let chain = FilterChain()
+	<~~ TrimFilter()
+	<~~ ReplaceFilter {
+		$0.replaceType = .ReplaceString(searchStr: "foo", replacementStr: "bar")
+	}
+	
+do {
+
+	let outValue: String? = chain.filter(inValue, nil)
+	
+} catch _ {
+
+}
+
+```
+
 
 ## Included Filters
 
@@ -142,24 +178,36 @@ Adding own filters that are working with the chain is quite easy
 ```swift
 
 class MyFilter: FilterProtocol {
-
+	
 	var mySetting: String!
 	
 	required init(@noescape _ initialize: (RegexReplaceFilter) -> Void = { _ in }) {
         
        initialize(self)
    }
-    
-   public func filter<I: Any, O: Any>(value: I?, _ context: [String: AnyObject]?) throws -> O? {
+   
+   func filter<I: Any, O: Any>(value: I?, _ context: [String: AnyObject]?) throws -> O? {
         
         // your filtering
-    }
+   }
 }
 
+// can be used:
+
+let chain = FilterChain()
+	<~~ MyFilter {
+		$0.mySetting = "foo"
+	}
 
 ```
 
 <!--- References -->
+
+[Eureka]: https://github.com/xmartlabs/Eureka
+[SwiftValidate]: https://github.com/dtop/SwiftValidate
+[Zend\Filter]: https://github.com/zendframework/zend-filter
+[CocoaPods]: https://cocoapods.org
+[Carthage]: https://github.com/Carthage/Carthage
 
 [Introduction]: #introduction
 [Requirements]: #requirements
