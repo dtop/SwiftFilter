@@ -26,17 +26,17 @@ class FilterChain: FilterProtocol {
     
     func filter<I: Any, O: Any>(value: I?, _ context: [String : AnyObject]? = nil) throws -> O? {
         
-        var val: O? = nil
+        var val: I? = value
         for filter in filters {
             
-            val = try filter.filter(value, context)
+            val = try filter.filter(val, context)
             
             if nil == val {
                 return nil
             }
         }
         
-        return val ?? value as? O
+        return val as? O
     }
     
     // MARK: CustomMethods

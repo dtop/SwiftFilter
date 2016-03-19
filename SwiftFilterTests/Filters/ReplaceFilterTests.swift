@@ -57,7 +57,9 @@ class ReplaceFilterTests: XCTestCase {
     
     func testFilterCanHandleOddInput() {
         
-        let filter = ReplaceFilter()
+        let filter = ReplaceFilter {
+            $0.replaceType = .ReplaceString(searchStr: "", replacementStr: "")
+        }
         let moo: Any? = nil
         
         do {
@@ -71,7 +73,23 @@ class ReplaceFilterTests: XCTestCase {
             XCTAssertEqual(outValue, nil)
             
         } catch _ {
+            XCTAssert(false)
+        }
+    }
+    
+    func testFilterThrowsIfNoReplaceTypeIsGiven() {
+     
+        let inString = "test"
+        let filter = ReplaceFilter()
+        
+        do {
             
+            let outString: String? = try filter.filter(inString, nil)
+            XCTAssert(false) // may never be reached
+            XCTAssertEqual(outString, nil) // needed for annoying unused msg
+        } catch let err as NSError {
+            
+            XCTAssertEqual(err.localizedDescription, "No replacementType given in ReplaceFilter")
         }
     }
 }

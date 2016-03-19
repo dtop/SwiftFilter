@@ -16,8 +16,7 @@ public class ReplaceFilter: FilterProtocol {
     }
     
     /// Holds the actual replacement type
-    public var replaceType: ReplaceType = .ReplaceString(searchStr: "", replacementStr: "")
-    
+    public var replaceType: ReplaceType!
     
     /**
      Easy init
@@ -44,11 +43,15 @@ public class ReplaceFilter: FilterProtocol {
      */
     public func filter<I: Any, O: Any>(value: I?, _ context: [String: AnyObject]?) throws -> O? {
         
+        guard let rType: ReplaceType = self.replaceType else {
+            throw NSError(domain: swiftFilterErrorDomain, code: 1, userInfo: [NSLocalizedDescriptionKey: "No replacementType given in ReplaceFilter"])
+        }
+        
         guard var inStr: String = value as? String else {
             return nil
         }
         
-        switch self.replaceType {
+        switch rType {
             
         case let .ReplaceString(searchString, replacementStr):
             return inStr.stringByReplacingOccurrencesOfString(searchString, withString: replacementStr) as? O

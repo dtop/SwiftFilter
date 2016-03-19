@@ -8,6 +8,8 @@
 
 import Foundation
 
+public let swiftFilterErrorDomain = "de.nerdsee.SwiftFilter.Error"
+
 /**
  * Protocol to use generical filters
  */
@@ -37,4 +39,12 @@ public protocol FilterProtocol: FilterType {
      - parameter initialize: the initializer func
      */
     init(@noescape _ initialize: (Self) -> Void)
+}
+
+infix operator <~~ { associativity left precedence 100 }
+
+func <~~ <T: FilterProtocol>(lhs: FilterChain, rhs: T) -> FilterChain {
+    
+    lhs.registerFilter(rhs)
+    return lhs
 }

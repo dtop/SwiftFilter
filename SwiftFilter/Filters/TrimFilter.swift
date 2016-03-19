@@ -10,6 +10,8 @@ import Foundation
 
 public class TrimFilter: FilterProtocol {
     
+    // MARK: FilterProtocol
+    
     public required init(@noescape _ initialize: (TrimFilter) -> Void = { _ in }) {
         
         initialize(self)
@@ -17,6 +19,11 @@ public class TrimFilter: FilterProtocol {
     
     public func filter<I: Any, O: Any>(value: I?, _ context: [String : AnyObject]?) throws -> O? {
         
-        return value as? O
+        guard let inStr: String = value as? String else {
+            return nil
+        }
+        
+        let trimmed = inStr.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        return trimmed as? O
     }
 }

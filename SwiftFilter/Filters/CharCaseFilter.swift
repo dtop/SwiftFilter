@@ -19,17 +19,14 @@ public class CharCaseFilter: FilterProtocol {
      - ucwords:   all words separated by space goes ucfirst
      */
     public enum Case {
-        case lowercase
-        case uppercase
-        case ucfirst
-        case ucwords
+        case Lowercase
+        case Uppercase
+        case Ucfirst
+        case Ucwords
     }
     
-    /// return input if filtering fails
-    public var returnInputOnFailure: Bool = true
-    
     /// the filtering char case
-    public var charCase: Case = .lowercase
+    public var charCase: Case!
     
     // MARK: FilterProtocol
     
@@ -39,6 +36,10 @@ public class CharCaseFilter: FilterProtocol {
     }
     
     public func filter<I: Any, O: Any>(value: I?, _ context: [String : AnyObject]?) throws -> O? {
+        
+        guard let cCase: Case = self.charCase else {
+            throw NSError(domain: swiftFilterErrorDomain, code: 1, userInfo: [NSLocalizedDescriptionKey: "No case convert mode set in CharCaseFilter"])
+        }
         
         guard let value: String = value as? String else {
             return nil
@@ -50,17 +51,17 @@ public class CharCaseFilter: FilterProtocol {
         
         var returnValue = ""
         
-        switch self.charCase {
-        case .lowercase:
+        switch cCase {
+        case .Lowercase:
             returnValue = value.lowercaseString
             break
-        case .uppercase:
+        case .Uppercase:
             returnValue = value.uppercaseString
             break
-        case .ucfirst:
+        case .Ucfirst:
             returnValue = self.ucfirst(value)
             break
-        case .ucwords:
+        case .Ucwords:
             returnValue = value.capitalizedString
             break
         }
@@ -85,11 +86,4 @@ public class CharCaseFilter: FilterProtocol {
     }
     
     
-}
-
-infix operator <- {}
-
-func <- <T: FilterProtocol>(lhs: FilterChain, rhs: T) {
-    
-    lhs.registerFilter(rhs)
 }

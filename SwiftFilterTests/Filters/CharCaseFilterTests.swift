@@ -24,7 +24,7 @@ class CharCaseFilterTests: XCTestCase {
     func testCharCaseFilterModifiesCaseUpperAndLower() {
         
         let filter = CharCaseFilter {
-            $0.charCase = .lowercase
+            $0.charCase = .Lowercase
         }
         
         do {
@@ -35,7 +35,7 @@ class CharCaseFilterTests: XCTestCase {
             
             XCTAssertEqual(result, "moo")
             
-            filter.charCase = .uppercase
+            filter.charCase = .Uppercase
             
             guard let result2: String = try filter.filter("moo", nil) else {
                 throw NSError(domain: "could not filter", code: 0, userInfo: nil)
@@ -51,7 +51,7 @@ class CharCaseFilterTests: XCTestCase {
     func testCharCaseFilterCanUcfirst() {
         
         let filter = CharCaseFilter {
-            $0.charCase = .ucfirst
+            $0.charCase = .Ucfirst
         }
         
         do {
@@ -71,7 +71,7 @@ class CharCaseFilterTests: XCTestCase {
     func testCharCaseFilterCanUcWords() {
         
         let filter = CharCaseFilter {
-            $0.charCase = .ucwords
+            $0.charCase = .Ucwords
         }
         
         do {
@@ -90,7 +90,10 @@ class CharCaseFilterTests: XCTestCase {
     
     func testCharCaseFilterCanHandleOddValues() {
         
-        let filter = CharCaseFilter()
+        let filter = CharCaseFilter {
+            $0.charCase = .Lowercase
+        }
+        
         let nilValue: String? = nil
         var result: String? = nil
         
@@ -107,6 +110,22 @@ class CharCaseFilterTests: XCTestCase {
             
         } catch _ {
             XCTAssert(false)
+        }
+    }
+    
+    func testCharCaseFilterThrowsWhenNoCaseIsGiven() {
+        
+        let inString = "test"
+        let filter = CharCaseFilter()
+        
+        do {
+            
+            let outString: String? = try filter.filter(inString, nil)
+            XCTAssert(false) // may never be reached
+            XCTAssertEqual(outString, nil) // needed for annoying unused msg
+        } catch let err as NSError {
+            
+            XCTAssertEqual(err.localizedDescription, "No case convert mode set in CharCaseFilter")
         }
     }
 }
