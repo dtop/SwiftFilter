@@ -5,6 +5,7 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/dtop/SwiftValidate/master/LICENSE)
 [![codebeat badge](https://codebeat.co/badges/f380424d-a290-4d89-8b48-431da0bec33c)](https://codebeat.co/projects/github-com-dtop-swiftfilter)
+[![codecov.io](https://codecov.io/github/dtop/SwiftFilter/coverage.svg?branch=master)](https://codecov.io/github/dtop/SwiftFilter?branch=master)
 [![GitHub release](https://img.shields.io/github/release/dtop/SwiftFilter.svg)](https://github.com/dtop/SwiftFilter)
 
 ##### Chainable filters that can be applied to collections to filter (change / correct) form inputs
