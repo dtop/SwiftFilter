@@ -26,7 +26,7 @@ class CallbackFilterTests: XCTestCase {
         let inValue = 634
         let filter = CallbackFilter {
             $0.callback = {
-                (value) -> Any in
+                (value) -> Any? in
 
                 guard let myInt: Int = value as? Int else {
                     throw NSError(domain: "my.error.domain", code: 1, userInfo: [NSLocalizedDescriptionKey: "value is not an integer"])
@@ -51,7 +51,7 @@ class CallbackFilterTests: XCTestCase {
         let inValue = "LoL"
         let filter = CallbackFilter {
             $0.callback = {
-                (value) -> Any in
+                (value) -> Any? in
                 
                 guard let myInt: Int = value as? Int else {
                     throw NSError(domain: "my.error.domain", code: 1, userInfo: [NSLocalizedDescriptionKey: "value is not an integer"])
